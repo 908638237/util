@@ -2,7 +2,7 @@ package slice
 
 import (
 	"errors"
-	"github.com/908638237/util"
+	"github.com/908638237/util/common"
 	"math/rand"
 	"reflect"
 	"time"
@@ -80,7 +80,7 @@ func checkInterfaceVal(srcValue reflect.Value, kind ...reflect.Kind) error {
 }
 
 // RemoveRepeatElementSlice 切片去重
-func RemoveRepeatElementSlice[D util.DataType](list []D) []D {
+func RemoveRepeatElementSlice[D common.DataType](list []D) []D {
 	temp := make(map[D]bool)
 	index := 0
 	for _, v := range list {

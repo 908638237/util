@@ -3,21 +3,21 @@ package rand
 import (
 	"errors"
 	"fmt"
-	"github.com/908638237/util"
+	"github.com/908638237/util/common"
 	"math"
 	"math/rand"
 	"strconv"
 	"strings"
 )
 
-func Max[D util.DataType](a, b D) D {
+func Max[D common.DataType](a, b D) D {
 	if a > b {
 		return a
 	}
 	return b
 }
 
-func Min[D util.DataType](a, b D) D {
+func Min[D common.DataType](a, b D) D {
 	if a > b {
 		return b
 	}
