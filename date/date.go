@@ -1,6 +1,8 @@
 package date
 
 import (
+	"fmt"
+	"github.com/golang-module/carbon/v2"
 	"strconv"
 	"strings"
 	"time"
@@ -24,6 +26,7 @@ func GetYTD(typ string) (YTD int) {
 }
 
 func GetDateByDay(year, month, day int) (rs int) {
+	carbon.Now().AddYears(year).AddMonths(month).AddDays(day)
 	rs, _ = strconv.Atoi(time.Now().AddDate(year, month, day).Format("20060102"))
 	return
 }
@@ -97,4 +100,31 @@ func GetMinutesByUnix(n1, n2 int64) float64 {
 		return 0
 	}
 	return time.Unix(n1, 0).Sub(time.Unix(n2, 0)).Minutes()
+}
+
+func CheckFestival() bool {
+	nowDate := carbon.Now()
+	// 获取农历的月日
+	_, lunarMonth, lunarDay := nowDate.Lunar().Date()
+	lunar := fmt.Sprintf("%v-%v", lunarMonth, lunarDay)
+	if nowDate.DayOfWeek() >= 5 {
+		return true
+	}
+	if nowDate.IsSameDay(nowDate.SetMonth(1).SetDay(1)) {
+		// 元旦节
+		return true
+	}
+	if nowDate.IsSameDay(nowDate.SetMonth(5).SetDay(1)) {
+		// 劳动节
+		return true
+	}
+	if nowDate.BetweenIncludedBoth(nowDate.SetMonth(10).SetDay(1), nowDate.SetMonth(10).SetDay(3)) {
+		// 国庆节三天
+		return true
+	}
+	if lunar == "5-5" || lunar == "8-15" || lunar == "1-1" || lunar == "1-2" || lunar == "1-3" {
+		// 端午 中秋 春节
+		return true
+	}
+	return false
 }
