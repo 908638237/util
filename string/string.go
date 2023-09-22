@@ -5,6 +5,21 @@ import (
 	"strings"
 )
 
+func BuilderConcat(str ...string) string {
+	if len(str) == 0 {
+		return ""
+	}
+	if len(str) < 2 {
+		return str[0]
+	}
+	var builder strings.Builder
+	builder.Grow(len(str))
+	for _, v := range str {
+		builder.WriteString(v)
+	}
+	return builder.String()
+}
+
 func SubString(str string, begin, length int) (substr string) {
 	// 将字符串的转换成[]rune
 	rs := []rune(str)
