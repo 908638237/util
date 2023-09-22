@@ -8,6 +8,7 @@ require (
 )
 
 require (
+	github.com/golang-module/carbon/v2 v2.2.8 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pides/gwordsfilter v0.2.2 // indirect
